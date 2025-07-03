@@ -34,9 +34,14 @@ const DashboardPage = () => {
 
   return (
     <div className="dashboard-container">
-      <div className="dashboard-welcome">
-        <h1>안녕하세요, {user.name}님!</h1>
-        <p>오늘도 건강한 하루 보내세요. 행복한 여정이 함께합니다.</p>
+      <div className="greeting-card">
+        <div className="dashboard-greeting">
+          <h1 className="greeting-title">안녕하세요, {user?.name}님!</h1>
+          <div className="greeting-message">
+            오늘도 건강한 하루 보내세요.<br />
+            행복한 여정이 함께합니다.
+          </div>
+        </div>
       </div>
 
       <div className="dashboard-stats">

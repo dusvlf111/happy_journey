@@ -398,10 +398,14 @@
 }
 
 .dashboard-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+}
+
+.dashboard-stats > * {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .stat-card {
@@ -1660,4 +1664,195 @@
   .service-image-placeholder-large {
     font-size: 3rem;
   }
+}
+
+/* === 모바일 반응형 스타일 === */
+@media (max-width: 600px) {
+  .card {
+    padding: 1em;
+    margin-bottom: 0.8em;
+    font-size: 1em;
+  }
+  .title {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+  }
+  .btn {
+    width: 100%;
+    padding: 0.7em 0;
+    font-size: 1em;
+  }
+  .input, input, textarea, select {
+    width: 100%;
+    font-size: 1em;
+    box-sizing: border-box;
+  }
+  .header, .footer, .navigation {
+    padding: 0.7em 0;
+    font-size: 1em;
+    margin-bottom: 0.5em;
+  }
+  .main {
+    padding: 1em 0.2em;
+    min-height: 50vh;
+  }
+  .logo {
+    height: 3em;
+    padding: 0.5em;
+  }
+  .navigation ul {
+    flex-direction: column !important;
+    gap: 0.5em !important;
+  }
+}
+
+/* 햄버거 메뉴 버튼 - 모바일에서만 보임 */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2em;
+  margin-bottom: 0.5em;
+  cursor: pointer;
+}
+@media (max-width: 600px) {
+  .nav-toggle {
+    display: block;
+    margin: 0 auto 0.5em auto;
+  }
+  .nav-list {
+    display: none;
+    flex-direction: column !important;
+    gap: 0.5em !important;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .nav-list.open {
+    display: flex;
+  }
+}
+
+/* 데스크탑 네비게이션: 모바일에서 숨김 */
+.desktop-nav { display: block; }
+@media (max-width: 600px) {
+  .desktop-nav { display: none; }
+}
+
+/* 모바일 하단 네비게이션 */
+.mobile-bottom-nav {
+  display: none;
+}
+@media (max-width: 600px) {
+  .mobile-bottom-nav {
+    display: block;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    background: #fff;
+    border-top: 1px solid #eee;
+    z-index: 100;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
+  }
+  .mobile-bottom-nav ul {
+    display: flex;
+    justify-content: space-around;
+    margin: 0; padding: 0;
+    list-style: none;
+  }
+  .mobile-bottom-nav li {
+    flex: 1;
+    text-align: center;
+    font-size: 0.9em;
+    padding: 0.5em 0 0.2em 0;
+  }
+  .mobile-bottom-nav a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+  }
+  .mobile-bottom-nav a:active,
+  .mobile-bottom-nav a:focus {
+    color: #2563eb;
+  }
+  .mobile-bottom-nav span {
+    font-size: 1.3em;
+    display: block;
+  }
+}
+
+/* 로그인 버튼(모바일) */
+@media (max-width: 600px) {
+  .btn.login-btn {
+    font-size: 0.95em;
+    padding: 0.5em 0.8em;
+    width: auto;
+    min-width: 80px;
+    max-width: 140px;
+  }
+}
+
+/* 인사/메시지 색상 및 폰트 */
+.dashboard-greeting {
+  margin-bottom: 1.5em;
+  text-align: left;
+}
+.greeting-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #222 !important;
+  margin-bottom: 0.3em;
+}
+.greeting-message {
+  font-size: 1.1em;
+  color: #2563eb !important;
+  font-weight: 500;
+  line-height: 1.6;
+}
+@media (max-width: 600px) {
+  .greeting-title { font-size: 1em; }
+  .greeting-message { font-size: 0.95em; }
+}
+
+/* dashboard-stats 가로 3개 고정 */
+.dashboard-stats {
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+}
+.dashboard-stats > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.greeting-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 2.5em 2em;
+  margin-bottom: 2.5em;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.greeting-title {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #222 !important;
+  margin-bottom: 0.5em;
+}
+.greeting-message {
+  font-size: 1.3em;
+  color: #2563eb !important;
+  font-weight: 500;
+  line-height: 1.7;
+}
+@media (max-width: 600px) {
+  .greeting-card {
+    padding: 1em 0.5em;
+    border-radius: 8px;
+    margin-bottom: 1.5em;
+    max-width: 100%;
+  }
+  .greeting-title { font-size: 1em; }
+  .greeting-message { font-size: 0.95em; }
 }
