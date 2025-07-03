@@ -197,13 +197,13 @@
 }
 
 .notification-success {
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(16, 185, 129, 0.9);
   color: var(--success-color);
   border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 .notification-warning {
-  background: rgba(245, 158, 11, 0.1);
+  background: rgba(245, 158, 11, 0.9);
   color: var(--warning-color);
   border: 1px solid rgba(245, 158, 11, 0.2);
 }
@@ -293,4 +293,3 @@
     text-align: center;
   }
 }
-

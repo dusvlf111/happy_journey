@@ -21,7 +21,7 @@ export default function Header() {
       <div className="header-content">
         <Link to="/dashboard" className="header-brand">
           <div className="logo">
-            <span role="img" aria-label="logo">⚡</span>
+            <img src="/images/icons/logo500_500.png" alt="로고" width="32" height="32" style={{display:'block'}} />
           </div>
           <span className="title">행복한 여정</span>
         </Link>
