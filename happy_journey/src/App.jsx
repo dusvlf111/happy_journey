@@ -1,38 +1,12 @@
-// App.jsx는 MainLayout을 import만 하며, 실제 라우팅은 main.jsx에서 처리됩니다.
-// 별도 내용 없음
-
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// App.jsx - 라우팅 시스템의 진입점
+import React from 'react';
+import { useRoutes } from 'react-router-dom';
+import { routes } from './config/routes.jsx';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  const routing = useRoutes(routes);
+  return routing;
 }
 
-export default App
+export default App;

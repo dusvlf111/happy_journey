@@ -4,11 +4,19 @@ import React from 'react';
 /**
  * 로딩 스피너 컴포넌트
  */
-const Loading = () => (
-  <div className="flex justify-center items-center py-8">
-    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-    <span className="ml-3 text-blue-600">로딩 중...</span>
-  </div>
-);
+const Loading = ({ message = '로딩 중...', size = 'medium' }) => {
+  const sizeClasses = {
+    small: 'spinner-small',
+    medium: 'spinner',
+    large: 'spinner-large'
+  };
+
+  return (
+    <div className="loading-container">
+      <div className={sizeClasses[size]}></div>
+      <span className="loading-text">{message}</span>
+    </div>
+  );
+};
 
 export default Loading;

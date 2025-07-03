@@ -1,66 +1,133 @@
 // 로그인 페이지 (src/pages/auth/LoginPage.jsx)
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import useAuth from '../../hooks/useAuth';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useSimpleAuth } from '../../hooks/useSimpleAuth';
+import users from '../../services/mockData/users';
 import Button from '../../components/common/Button';
 import Input from '../../components/common/Input';
-import Loading from '../../components/common/Loading';
 
 /**
  * 로그인 폼 페이지
  */
 const LoginPage = () => {
-  const { login, user, loading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { user, login } = useSimpleAuth();
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
-  // 이미 로그인 상태면 대시보드로 이동
-  React.useEffect(() => {
-    if (!loading && user) navigate('/dashboard');
-  }, [user, loading, navigate]);
+  // 이미 로그인된 상태라면 리다이렉트
+  useEffect(() => {
+    if (user) {
+      const from = location.state?.from?.pathname || '/dashboard';
+      navigate(from, { replace: true });
+    }
+  }, [user, navigate, location]);
+
+  // 저장된 로그인 정보 불러오기
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('savedEmail');
+    const savedRememberMe = localStorage.getItem('rememberMe') === 'true';
+    
+    if (savedEmail && savedRememberMe) {
+      setEmail(savedEmail);
+      setRememberMe(true);
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
     setError('');
-    const res = await login(email, password);
-    if (res.success) {
-      navigate('/dashboard');
+    
+    // 목데이터에서 사용자 찾기
+    const foundUser = users.find(u => u.email === email && u.password === password);
+    
+    if (foundUser) {
+      // 로그인 성공
+      login(foundUser);
+      
+      // 로그인 정보 저장 여부에 따라 처리
+      if (rememberMe) {
+        localStorage.setItem('savedEmail', email);
+        localStorage.setItem('rememberMe', 'true');
+      } else {
+        localStorage.removeItem('savedEmail');
+        localStorage.removeItem('rememberMe');
+      }
+      
+      // 원래 가려던 페이지로 이동 (없으면 대시보드)
+      const from = location.state?.from?.pathname || '/dashboard';
+      navigate(from, { replace: true });
     } else {
-      setError(res.message);
+      setError('아이디 또는 비밀번호가 올바르지 않습니다.');
     }
+    
     setSubmitting(false);
   };
 
-  if (loading) return <Loading />;
+  // 이미 로그인된 상태라면 로딩 표시
+  if (user) {
+    return <div>리다이렉트 중...</div>;
+  }
 
   return (
-    <div className="max-w-md mx-auto mt-16 bg-white shadow rounded p-8">
-      <h2 className="text-2xl font-bold mb-6 text-center">로그인</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <Input
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          placeholder="이메일"
-        />
-        <Input
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          placeholder="비밀번호"
-        />
-        {error && <div className="text-red-500 text-sm">{error}</div>}
-        <Button type="submit" className="w-full" disabled={submitting}>
-          {submitting ? '로그인 중...' : '로그인'}
-        </Button>
-      </form>
-      <div className="flex justify-between mt-4 text-sm">
-        <Link to="/auth/register" className="text-blue-600 hover:underline">회원가입</Link>
-        <Link to="/auth/forgot" className="text-blue-600 hover:underline">비밀번호 찾기</Link>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2 className="auth-title">로그인</h2>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <Input
+              type="text"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="아이디 (test)"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <Input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="비밀번호 (test)"
+              required
+            />
+          </div>
+          
+          <div className="form-group">
+            <label className="remember-me">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={e => setRememberMe(e.target.checked)}
+              />
+              <span className="checkmark"></span>
+              로그인 정보 저장
+            </label>
+          </div>
+
+          {error && <div className="form-error">{error}</div>}
+          
+          <Button type="submit" disabled={submitting} className="btn-full">
+            {submitting ? '로그인 중...' : '로그인'}
+          </Button>
+        </form>
+        
+        <div className="auth-links">
+          <Link to="/auth/register">회원가입</Link>
+          <Link to="/auth/forgot">비밀번호 찾기</Link>
+        </div>
+        
+        <div className="demo-info">
+          <p><strong>데모 계정:</strong></p>
+          <p>아이디: test</p>
+          <p>비밀번호: test</p>
+        </div>
       </div>
     </div>
   );
