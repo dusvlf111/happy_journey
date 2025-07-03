@@ -1,0 +1,107 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-radius: 8px;
+  padding: 1.5em;
+  margin-bottom: 1em;
+  color: #333;
+  text-align: left;
+}
+
+.btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn:hover {
+  background: #1d4ed8;
+}
+
+.input {
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 0.5em 0.8em;
+  font-size: 1em;
+  margin-bottom: 0.5em;
+}
+
+.risk-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+}
+.risk-low { background: #22c55e; }
+.risk-medium { background: #facc15; }
+.risk-high { background: #ef4444; }
+
+.header, .footer, .navigation {
+  padding: 1em 0;
+  background: #f3f4f6;
+  text-align: center;
+  margin-bottom: 1em;
+}
+.main {
+  min-height: 60vh;
+  padding: 2em 0;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-gray { color: #888; }
+.mt-2 { margin-top: 0.5em; }
+.mb-2 { margin-bottom: 0.5em; }
+.mb-4 { margin-bottom: 1.5em; }
+
+.read-the-docs {
+  color: #888;
+}

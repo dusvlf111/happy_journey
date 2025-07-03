@@ -1,9 +1,0 @@
-/* CSS 변수 (src/styles/variables.css) */
-:root {
-  --color-primary: #2563eb;
-  --color-secondary: #fbbf24;
-  --color-danger: #ef4444;
-  --color-success: #22c55e;
-  --color-bg: #f9fafb;
-  --font-main: 'Pretendard', 'Noto Sans KR', Arial, sans-serif;
-}
